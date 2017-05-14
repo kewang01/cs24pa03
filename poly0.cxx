@@ -12,6 +12,9 @@ namespace main_savitch_3
 
   polynomial::polynomial(double c,unsigned int exponent){
     assert(exponent<=MAX_EX);
+    for(unsigned int i=0;i<CAPACITY;i++){
+      coef[i]=0;
+    }
     coef[exponent]=c;
     current_degree=exponent;
   }
@@ -34,7 +37,7 @@ namespace main_savitch_3
       current_degree=exponent;
     }
     if(coefficient==0 && exponent==current_degree){
-      current_degree=exponent;
+      current_degree=previous_term(exponent);
     }
   }
 
@@ -127,13 +130,18 @@ namespace main_savitch_3
       out<<0;
       return out;
     }
-    
-    out<<"";  
-    for(unsigned int i=p.degree();i>=0;i--){
-      if(p.coefficient(i)!=0){
-	out<<out<<"+"<<"("<<p.coefficient(i)<<")"<<"x^"<<i;
-      }
+
+    for(unsigned int i=0;i<=polynomial::MAX_EX;i++){
+      out<<out<<"+"<<p.coefficient(i)<<"x^"<<i;
     }
+    
+    // out<<"";  
+    //for(unsigned int i=p.degree();i>=0;i--){
+    // if(p.coefficient(i)!=0){
+    //out<<"+"<<"("<<p.coefficient(i)<<")"<<"x^"<<i;
+    // }
+    //}
+    //out<<p.degree()<<" "<<p.coefficient(5);
     return out;
   }
     
