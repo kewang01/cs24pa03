@@ -66,8 +66,12 @@ namespace main_savitch_3
   polynomial polynomial::derivative() const{
     polynomial deriv;
     for(unsigned int i=0;i<current_degree;i++){
-      deriv.assign_coef((i+1)*coef[i+1],i);
+      deriv.coef[i]=(i+1)*coef[i+1];
     }
+    if(current_degree==0)
+      deriv.current_degree=0;
+    else
+      deriv.current_degree=current_degree-1;
     return deriv;
   }
 
