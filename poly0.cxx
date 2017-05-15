@@ -127,7 +127,7 @@ namespace main_savitch_3
     polynomial product;
     for(unsigned int i=0;i<=p1.degree();i++){
       for(unsigned int j=0;j<=p2.degree();j++){
-	product.add_to_coef(p1.coefficient(i)*p2.coefficient(j),p1.degree()+p2.degree());
+	product.add_to_coef(p1.coefficient(i)*p2.coefficient(j),i+j);
       }
     }
     return product;
