@@ -25,9 +25,13 @@ namespace main_savitch_3
     if(coef[exponent]!=0 && exponent>current_degree){
       current_degree=exponent;
     }
-    if(exponent==current_degree && coef[exponent]==0){
+    if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)<CAPACITY){
       current_degree=previous_term(exponent);
     }
+    if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)>=CAPACITY){
+      current_degree=0;
+    }
+    
   }
 
   void polynomial::assign_coef(double coefficient, unsigned int exponent){
@@ -36,9 +40,13 @@ namespace main_savitch_3
     if(coefficient!=0 && exponent>current_degree){
       current_degree=exponent;
     }
-    if(coefficient==0 && exponent==current_degree){
+    if(coefficient==0 && exponent==current_degree && previous_term(exponent)<CAPACITY){
       current_degree=previous_term(exponent);
     }
+    if(coefficient==0 && exponent==current_degree && previous_term(exponent)>=CAPACITY){
+      current_degree=previous_term(exponent);
+    }
+    
   }
 
   void polynomial::clear(){
