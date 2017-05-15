@@ -1,0 +1,62 @@
+#include<cassert>
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include "poly1.h"
+
+using namespace std;
+
+namespace main_savitch_4
+{
+  const unsigned int polynomial::DEFAULT_CAPACITY;
+
+  polynomial::polynomial(double c,unsigned int exponent){
+    if(exponent<DEFAULT_CAPACITY){
+      coef=new double[DEFAULT_CAPACITY];
+      size=DEFAULT_CAPACITY;
+      for(unsigned int i=0;i<DEFAULT_CAPACITY;i++){
+	coef[i]=0;
+      }
+      if(c==0){
+	current_degree=0;
+      }
+      else{
+	coef[exponent]=c;
+	current_degree=exponent;
+      }
+    }
+    else{
+      coef=new double[exponent+1];
+      size=exponent+1;
+      for(unsigned int i=0;i<=exponent;i++){
+	coef[i]=0;
+      }
+      if(c==0){
+	current_degree=0;
+      }
+      else{
+	coef[exponent]=c;
+	current_degree=exponent;
+      }
+    }
+
+  }
+
+  polynomial::polynomial(const polynomial& source){
+    coef=new double[source.size];
+    size=source.size;
+    current_degree=source.current_degree;
+    copy(source.coef,source.size,coef);
+  }
+
+  polynomial::~polynomial(){
+    delete [] coef;
+  }
+
+  void polynomial::reserve(unsigned int number){
+    
+      
+  
+      
+  
+
