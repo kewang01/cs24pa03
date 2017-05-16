@@ -46,7 +46,7 @@ namespace main_savitch_4
     coef=new double[source.size];
     size=source.size;
     current_degree=source.current_degree;
-    copy(source.coef,source.size,coef);
+    copy(source.coef,source.coef+size,coef);
   }
 
   polynomial::~polynomial(){
@@ -67,7 +67,69 @@ namespace main_savitch_4
     size=number;
   }
 
+  polynomial& polynomial::operator=(const polynomial& source){
+    if(this==&source)
+      return;
+    double *ass=new double[source.size];
+    delete [] coef;
+    coef=ass;
+    size=source.size;
+    current_degree=source.current_degree;
+    copy(source.coef,source.coef+size,coef);
+    return *this;
+  }
+
+  void polynomial::add_to_coef(double amount,unsigned int exponent){
+    if(exponent<size){
+      coef[exponent]+=amount;
+      if(coef[exponent]!=0 && exponent>current_degree){
+	current_degree=exponent;
+      }
+      if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)<size){
+	current_degree=previous_term(exponent);
+      }
+      if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)>=size){
+	current_degree=0;
+      }
+    }
+    else{
+      reserve(exponent+1);
+      size=exponent+1;
+      coef[exponent]+=amount;
+      if(amount!=0){
+	current_degree=exponent;
+      }
+    }
+  }
+
+  void polynomial::assign_coef(double coefficient, unsigned int exponent){
+    if(exponent<size){
+      coef[exponent]=coefficient;
+      if(coef[exponent]!=0 && exponent>current_degree){
+	current_degree=exponent;
+      }
+      if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)<size){
+	current_degree=previous_term(exponent);
+      }
+      if(exponent==current_degree && coef[exponent]==0 && previous_term(exponent)>=size){
+	current_degree=0;
+      }
+    }
+    else{
+      reserve(exponent+1);
+      size=exponent+1;
+      coef[exponent]=coefficient;
+      if(coefficient!=0){
+	current_degree=exponent;
+      }
+    }
+  }
+
   
+  
+	
+      
+    
     
       
   
