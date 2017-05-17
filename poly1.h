@@ -163,7 +163,8 @@ namespace main_savitch_4
 	~polynomial( );
 
 	// MODIFICATION MEMBER FUNCTIONS
-	polynomial& operator =(const polynomial& source);
+	//polynomial& operator =(const polynomial& source);
+	void operator =(const polynomial& source);
 	void add_to_coef(double amount, unsigned int exponent);
 	void assign_coef(double coefficient, unsigned int exponent);
 	void clear( );
